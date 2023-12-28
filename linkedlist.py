@@ -53,31 +53,33 @@ class LinkedList:
 
     def pop(
         self,
-        index: int
+        index=-1
     ) -> None:
-        count = 0
-        prev, curr = self.head, self.head.next
+        if (index < 0):
+            target = self.length + index
+        else:
+            target = index
         if (
-            (index == 0) and
+            (target == 0) and
             (self.head.next)
         ):
             self.head = self.head.next
             
+        count = 0
+        prev, curr = self.head, self.head.next
         while (curr):
-            if (count == index):
-                if (curr.next):
-                    prev.next = curr.next
-                    curr.next = None
-                    self.length -= 1
-                    return
-            print(prev.val)
+            count += 1
+            if (count == target):
+                prev.next = curr.next
+                curr.next = None
+                self.length -= 1
+                return
             prev = curr
             curr = curr.next
-            count += 1
 
     
     def getValues(
-            self
+        self
     ) -> None:
         print("v----- getValues() -----v")
         current = self.head
@@ -88,6 +90,24 @@ class LinkedList:
             count += 1
         print("^----- getValues() -----^")
 
+    
+    def getElement(
+        self,
+        index: int
+    ) -> None:
+        if (index < 0):
+            target = self.length + index
+        else:
+            target = index
+        current = self.head
+        count = 0
+        while (current):
+            if (count == target):
+                print(f'\n---FOUND---\nIndex: {target}\nValue: {current.val}\n---FOUND---\n')
+                return
+            current = current.next
+            count += 1
+        print(f'ELEMENT NOT FOUND')
     
 def populate(
     list
@@ -100,3 +120,7 @@ linky = LinkedList()
 populate(linky)
 print(linky.length)
 linky.getValues()
+linky.getElement(-1)
+linky.pop()
+linky.getValues()
+linky.getElement(-2)

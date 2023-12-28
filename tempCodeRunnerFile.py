@@ -1,2 +1,4 @@
- == start_index):
-    #     return board
+urr.next
+                curr.next = None
+                self.length -= 1
+                return
