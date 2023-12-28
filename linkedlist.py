@@ -12,37 +12,41 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-        self.length = None
+        self.length = 0
 
 
-    def insert_left(
+    def insert(
         self,
-        val=None
+        val=None,
+        index=-1
     ) -> None:
+        if (index < 0):
+            target = self.length + 1 + index
+        else:
+            target = index
         new_node = ListNode(val)
+        count = 0
         if (self.head is None):
             self.head = new_node
             self.tail = new_node
             self.length = 1
-        else:
-            new_node.next = self.head
-            self.head = new_node
-            self.length += 1
-    
-
-    def insert_right(
-        self,
-        val=None
-    ) -> None:
-        new_node = ListNode(val)
-        if (self.head is None):
-            self.head = new_node
-            self.tail = new_node
-            self.length = 1
-        else:
+        elif (target in (-1, self.length)):
             self.tail.next = new_node
             self.tail = new_node
-            self.length += 1
+        elif (target == 0):
+            new_node.next = self.head
+            self.head = new_node
+        else:
+            prev, curr = self.head, self.head.next
+            while (curr):
+                count += 1
+                if (count == target):
+                    new_node.next = curr
+                    prev.next = new_node
+                    return
+                prev = curr
+                curr = curr.next
+        print("INDEX NOT FOUND")
 
 
     def pop(
@@ -77,7 +81,7 @@ class LinkedList:
         current = self.head
         count = 0
         while current:
-            print(f'Element {count}: {current.val}')
+            print(f'Index {count}: {current.val}')
             current = current.next
             count += 1
         print("^----- getValues() -----^")
@@ -97,4 +101,5 @@ print(linky.length)
 linky.getValues()
 linky.pop(4)
 print(linky.length)
+linky.insert(6, -8)
 linky.getValues()
