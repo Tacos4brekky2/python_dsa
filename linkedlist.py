@@ -29,13 +29,15 @@ class LinkedList:
         if (self.head is None):
             self.head = new_node
             self.tail = new_node
-            self.length = 1
+            self.length += 1
         elif (target in (-1, self.length)):
             self.tail.next = new_node
             self.tail = new_node
+            self.length += 1
         elif (target == 0):
             new_node.next = self.head
             self.head = new_node
+            self.length += 1
         else:
             prev, curr = self.head, self.head.next
             while (curr):
@@ -46,7 +48,7 @@ class LinkedList:
                     return
                 prev = curr
                 curr = curr.next
-        print("INDEX NOT FOUND")
+            print("INDEX NOT FOUND")
 
 
     def pop(
@@ -92,14 +94,9 @@ def populate(
 ) -> None:
     elements = [x * 3 for x in range(10)]
     for x in elements:
-        list.insert_right(x)
+        list.insert(x)
 
 linky = LinkedList()
-print(linky.length)
 populate(linky)
 print(linky.length)
-linky.getValues()
-linky.pop(4)
-print(linky.length)
-linky.insert(6, -8)
 linky.getValues()
