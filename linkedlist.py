@@ -39,19 +39,23 @@ class LinkedList:
             self.tail = new_node
 
     
-    def linearTraversal(
+    def getValues(
             self
     ) -> None:
+        print("----- getValues() -----")
         current = self.head
         while current:
-            print(f'\nValue: {current.val}')
+            print(f'Value: {current.val}')
             current = current.next
+        print("----- getValues() -----")
 
-
+def populate(
+    list
+) -> None:
+    elements = [x * 3 for x in range(10)]
+    for x in elements:
+        list.insert_right(x)
 
 linky = LinkedList()
-linky.insert_left(42)
-linky.insert_right(69)
-linky.insert_left(55)
-linky.linearTraversal()
-print(linky.head.next)
+populate(linky)
+linky.getValues()
